@@ -4,11 +4,16 @@ import * as Yup from 'yup'
 import TextError from './TextError'
 
 const initialValues = {
-    name: '',
+    name: 'Ahmad',
     email: '',
     channel: '',
-    commenst: '',
-    address: ''
+    comments: '',
+    address: '',
+    social: {
+        facebook: '',
+        twitter: ''
+    },
+    phoneNumbers : ['', '']
 }
 
 const onSubmit = values => {
@@ -81,12 +86,12 @@ function YoutubeForm() {
                 </div>
 
                 <div className='form-control'>
-                    <label htmlFor='comments'>Channel</label>
+                    <label htmlFor='comments'>Comments</label>
                     <Field as='textarea' id='comments' name='comments' />
                 </div>
 
                 <div className='form-control'>
-                    <label htmlFor='address'>Channel</label>
+                    <label htmlFor='address'>Address</label>
                     <Field name='address' >
                         { 
                             (props) => {
@@ -101,6 +106,26 @@ function YoutubeForm() {
                             }
                         }
                     </Field>
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor='facebook'>Facebook profile</label>
+                    <Field type='text' id='facebook' name='social.facebook' />
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor='twitter'>Twitter profile</label>
+                    <Field type='text' id='twitter' name='social.twitter' />
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor='primaryPh'>Primary phone number</label>
+                    <Field type='text' id='primaryPh' name='phoneNumbers[0]' />
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor='secondaryPh'>Secondary phone number</label>
+                    <Field type='text' id='secondaryPh' name='phoneNumbers[1]' />
                 </div>
 
                 <button type='submit'>Submit</button>
