@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik'
+import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from 'formik'
 import * as Yup from 'yup'
 import TextError from './TextError'
 
@@ -62,7 +62,10 @@ function YoutubeForm() {
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit}>
+            onSubmit={onSubmit}
+            validateOnChange={false}
+            validateOnBlur={false}
+            >
             <Form>
                 <div className='form-control'>
                     <label htmlFor='name'>Name</label>
@@ -93,11 +96,11 @@ function YoutubeForm() {
 
                 <div className='form-control'>
                     <label htmlFor='address'>Address</label>
-                    <Field name='address' >
+                    <FastField name='address' >
                         { 
                             (props) => {
+                                {/* console.log('Field render') */}
                                 const { field, form, meta } = props
-                                console.log('Render props', props)
                                 return (
                                     <div>
                                         <input type='text' id='address' {...field} />
@@ -106,7 +109,7 @@ function YoutubeForm() {
                                 )
                             }
                         }
-                    </Field>
+                    </FastField>
                 </div>
 
                 <div className='form-control'>
@@ -134,10 +137,11 @@ function YoutubeForm() {
                     <FieldArray name='phNumbers'>
                         {
                             (fieldArrayProps) => {
-                                console.log('fieldArrayProps', fieldArrayProps)
+                                {/* console.log('fieldArrayProps', fieldArrayProps) */}
                                 const {push, remove, form} = fieldArrayProps
                                 const {values} = form
                                 const {phNumbers} = values
+                                console.log('Form errors', form.errors)
                                 return (
                                     <div>
                                     {
@@ -146,9 +150,15 @@ function YoutubeForm() {
                                                 <Field name={`phNumbers[${index}]`} />
                                                 {
                                                     index > 0 && 
-                                                    <button type='button' onClick={() => remove(index) }> - </button>
+                                                    <button type='button' onClick={() => remove(index) }> 
+                                                        {' '}
+                                                        - {' '} 
+                                                    </button>
                                                 }
-                                                <button type='button' onClick={() => push('')}> + </button>
+                                                <button type='button' onClick={() => push('')}>
+                                                    {' '}
+                                                    + {' '} 
+                                                </button>
                                             </div>
                                         ))
                                     }
