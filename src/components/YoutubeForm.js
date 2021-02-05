@@ -74,6 +74,7 @@ function YoutubeForm() {
             onSubmit={onSubmit}
             // validateOnChange={false}
             // validateOnBlur={false}
+            // validateOnMount
             >
             {
                 formik => {
@@ -192,7 +193,7 @@ function YoutubeForm() {
                                 channel: true,
                                 comments: true
                             })}>Visit fields</button>
-                            <button type='submit'>Submit</button>
+                            <button type='submit' disabled={!(formik.dirty && formik.isValid)}>Submit</button>
                         </Form>
                     )
                 }
